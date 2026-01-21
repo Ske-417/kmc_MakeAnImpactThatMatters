@@ -192,7 +192,7 @@ function App() {
                   <span className="text-sm text-white/90 leading-tight font-bold">
                     {BOARD_SQUARES[currentPlayer.position].description}
                   </span>
-                </div>
+                </motion.div>
               </motion.div>
             ) : (
               <motion.div 
