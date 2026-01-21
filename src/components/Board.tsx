@@ -64,7 +64,7 @@ export const Board: React.FC<BoardProps> = ({ players, currentPlayerIndex }) => 
               />
 
               {/* Tile numbering */}
-              <div className="absolute top-1 left-1.5 text-[9px] font-black opacity-40 group-hover:opacity-100 transition-opacity tracking-tight">
+              <div className="absolute bottom-1 right-1.5 text-[9px] font-black opacity-30 group-hover:opacity-100 transition-opacity tracking-tight">
                 {String(square.id).padStart(2, '0')}
               </div>
 

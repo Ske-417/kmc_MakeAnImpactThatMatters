@@ -213,7 +213,7 @@ function App() {
           )}
           
           <div className="hover-status-container">
-            <button className="flex items-center gap-4 bg-white/80 backdrop-blur-xl hover:bg-white p-2 pr-6 rounded-full border border-white/40 transition-all duration-300 group shadow-[0_8px_32px_rgba(255,255,255,0.15)]">
+            <button className="flex items-center gap-4 bg-white/80 backdrop-blur-xl hover:bg-white p-2 pr-6 rounded-full transition-all duration-300 group shadow-[0_8px_32px_rgba(255,255,255,0.15)]">
               <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-black text-xl shadow-lg border-2 border-white">
                 {gameState.players.length}
               </div>
