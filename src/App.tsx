@@ -91,7 +91,6 @@ function App() {
                     onChange={(e) => updatePlayerName(index, e.target.value)}
                     className="input-field flex-grow py-5 text-lg"
                     placeholder={`名前を入力`}
-                    autoFocus={index === playerNames.length - 1}
                   />
                   {playerNames.length > 1 && (
                     <button 
