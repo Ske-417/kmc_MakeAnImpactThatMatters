@@ -164,11 +164,11 @@ function App() {
             {lastSpinResult !== null ? (
               <motion.div 
                 key={`${gameState.currentPlayerIndex}-${lastSpinResult}`}
-                initial={{ width: 0, opacity: 0, x: -40 }}
-                animate={{ width: 'auto', opacity: 1, x: 0 }}
-                exit={{ width: 0, opacity: 0, x: -20 }}
-                transition={{ duration: 0.5, ease: "circOut" }}
-                className="bg-white/[0.04] border border-white/10 rounded-r-2xl rounded-l-md flex items-center overflow-hidden backdrop-blur-2xl shadow-2xl h-16 pl-6 pr-6 -ml-8 z-10"
+                initial={{ width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0 }}
+                animate={{ width: 'auto', opacity: 1, paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
+                exit={{ width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white/[0.04] border border-white/10 rounded-r-2xl rounded-l-2xl flex items-center overflow-hidden backdrop-blur-2xl shadow-2xl h-16 -ml-8 z-10 pl-6 pr-6"
               >
                  {/* Color Bar */}
                 <div 
@@ -176,8 +176,16 @@ function App() {
                   style={{ backgroundColor: currentPlayer?.color }}
                 />
 
+                {/* Spacer to push text past the spinner overlap */}
+                <div className="w-4 shrink-0" />
+
                 {/* Text Content */}
-                <div className="flex flex-col whitespace-nowrap min-w-[200px]">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
+                  className="flex flex-col whitespace-nowrap min-w-[180px]"
+                >
                   <span className="text-xs font-black text-primary uppercase tracking-widest mb-0.5 opacity-80">
                     {BOARD_SQUARES[currentPlayer.position].label}
                   </span>
