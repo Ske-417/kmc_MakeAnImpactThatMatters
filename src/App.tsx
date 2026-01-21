@@ -69,7 +69,7 @@ function App() {
             <h1 className="text-8xl font-black mb-4 tracking-tighter text-white drop-shadow-[0_0_40px_rgba(134,188,37,0.3)]">
               DTC <span className="text-primary">人生ゲーム</span>
             </h1>
-            <p className="text-[14px] opacity-60 mb-20 uppercase tracking-[0.6em] font-black">Make an impact that matters • v3.0</p>
+            <p className="text-[14px] opacity-60 mb-20 uppercase tracking-[0.6em] font-black">Make an impact that matters • v3.1</p>
           </motion.div>
           
           <div className="space-y-8 mb-32 max-w-xl mx-auto flex flex-col items-center">
