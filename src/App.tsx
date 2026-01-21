@@ -164,26 +164,37 @@ function App() {
             {lastSpinResult !== null ? (
               <motion.div 
                 key={`${gameState.currentPlayerIndex}-${lastSpinResult}`}
-                initial={{ opacity: 0, y: -20, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 20, scale: 0.98 }}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-2xl p-5 flex items-center gap-6 backdrop-blur-2xl relative overflow-hidden group shadow-2xl"
+                initial={{ width: '3.5rem', opacity: 0 }}
+                animate={{ width: 'auto', opacity: 1 }}
+                exit={{ width: '3.5rem', opacity: 0 }}
+                transition={{ duration: 0.5, ease: "circOut" }}
+                className="bg-white/[0.04] border border-white/10 rounded-2xl flex items-center overflow-hidden backdrop-blur-2xl relative shadow-2xl h-14"
               >
+                 {/* Color Bar */}
                 <div 
-                  className="absolute left-0 top-0 bottom-0 w-1.5"
+                  className="absolute left-0 top-0 bottom-0 w-1.5 z-20"
                   style={{ backgroundColor: currentPlayer?.color }}
                 />
-                <div className="bg-white/10 w-14 h-14 rounded-2xl flex items-center justify-center font-black text-3xl shrink-0 text-white shadow-inner">
+
+                {/* Number Box (Always visible) */}
+                <div className="w-14 h-full flex items-center justify-center font-black text-3xl shrink-0 text-white shadow-inner bg-white/10 z-10 relative">
                   {lastSpinResult}
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-black text-primary uppercase tracking-widest mb-1 opacity-80">
+
+                {/* Text Content (Slides out) */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                  className="flex flex-col px-5 whitespace-nowrap min-w-[200px]"
+                >
+                  <span className="text-xs font-black text-primary uppercase tracking-widest mb-0.5 opacity-80">
                     {BOARD_SQUARES[currentPlayer.position].label}
                   </span>
-                  <span className="text-sm text-white/90 leading-relaxed font-bold">
+                  <span className="text-sm text-white/90 leading-tight font-bold">
                     {BOARD_SQUARES[currentPlayer.position].description}
                   </span>
-                </div>
+                </motion.div>
               </motion.div>
             ) : (
               <motion.div 

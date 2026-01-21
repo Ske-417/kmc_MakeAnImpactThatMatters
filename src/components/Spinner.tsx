@@ -15,7 +15,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ onSpin, isSpinning, lastResult
         whileTap={{ scale: 0.95 }}
         onClick={onSpin}
         disabled={isSpinning}
-        className="w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-black/60 border-2 border-primary flex items-center justify-center relative backdrop-blur-xl shadow-[0_0_30px_rgba(134,188,37,0.3)] disabled:opacity-80 transition-shadow duration-500 overflow-hidden"
+        className="w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-black/60 border-2 border-primary flex items-center justify-center relative backdrop-blur-xl shadow-[0_0_30px_rgba(134,188,37,0.3)] disabled:opacity-80 transition-shadow duration-500 overflow-hidden"
       >
         {/* Animated Spin Ring */}
         {isSpinning && (
