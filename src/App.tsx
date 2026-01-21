@@ -149,9 +149,9 @@ function App() {
         </div>
 
         {/* Center: Event Display & Spinner */}
-        <div className="flex-grow flex justify-center items-center gap-8 max-w-4xl">
-          {/* Spinner moved here */}
-          <div className="relative shrink-0">
+        <div className="flex-grow flex justify-center items-center gap-4 max-w-4xl relative">
+          {/* Spinner (Always visible, acts as the number anchor) */}
+          <div className="relative shrink-0 z-20">
             <Spinner onSpin={spin} isSpinning={isSpinning} lastResult={lastSpinResult} />
             {isSpinning && (
               <motion.div 
@@ -164,43 +164,33 @@ function App() {
             {lastSpinResult !== null ? (
               <motion.div 
                 key={`${gameState.currentPlayerIndex}-${lastSpinResult}`}
-                initial={{ width: '3.5rem', opacity: 0 }}
-                animate={{ width: 'auto', opacity: 1 }}
-                exit={{ width: '3.5rem', opacity: 0 }}
+                initial={{ width: 0, opacity: 0, x: -40 }}
+                animate={{ width: 'auto', opacity: 1, x: 0 }}
+                exit={{ width: 0, opacity: 0, x: -20 }}
                 transition={{ duration: 0.5, ease: "circOut" }}
-                className="bg-white/[0.04] border border-white/10 rounded-2xl flex items-center overflow-hidden backdrop-blur-2xl relative shadow-2xl h-14"
+                className="bg-white/[0.04] border border-white/10 rounded-r-2xl rounded-l-md flex items-center overflow-hidden backdrop-blur-2xl shadow-2xl h-16 pl-6 pr-6 -ml-8 z-10"
               >
                  {/* Color Bar */}
                 <div 
-                  className="absolute left-0 top-0 bottom-0 w-1.5 z-20"
+                  className="absolute bottom-0 left-0 right-0 h-1"
                   style={{ backgroundColor: currentPlayer?.color }}
                 />
 
-                {/* Number Box (Always visible) */}
-                <div className="w-14 h-full flex items-center justify-center font-black text-3xl shrink-0 text-white shadow-inner bg-white/10 z-10 relative">
-                  {lastSpinResult}
-                </div>
-
-                {/* Text Content (Slides out) */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3, duration: 0.4 }}
-                  className="flex flex-col px-5 whitespace-nowrap min-w-[200px]"
-                >
+                {/* Text Content */}
+                <div className="flex flex-col whitespace-nowrap min-w-[200px]">
                   <span className="text-xs font-black text-primary uppercase tracking-widest mb-0.5 opacity-80">
                     {BOARD_SQUARES[currentPlayer.position].label}
                   </span>
                   <span className="text-sm text-white/90 leading-tight font-bold">
                     {BOARD_SQUARES[currentPlayer.position].description}
                   </span>
-                </motion.div>
+                </div>
               </motion.div>
             ) : (
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-white text-sm font-black tracking-[0.5em] uppercase italic animate-pulse"
+                className="text-white text-sm font-black tracking-[0.5em] uppercase italic animate-pulse ml-4"
               >
                 戦略的ムーブを待機中...
               </motion.div>
