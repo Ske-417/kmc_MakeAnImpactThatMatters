@@ -11,7 +11,7 @@ interface StatusPanelProps {
 
 export const StatusPanel: React.FC<StatusPanelProps> = ({ players, currentPlayerIndex, turnCount }) => {
   return (
-    <div className="flex flex-col gap-5 p-8 w-full shadow-2xl border border-white/10 bg-[#050505]/95 backdrop-blur-3xl rounded-3xl">
+    <div className="flex flex-col gap-5 p-8 w-full shadow-2xl border border-white/10 bg-nearly-black backdrop-blur-3xl rounded-3xl">
       <div className="flex justify-between items-end mb-2 border-b border-white/10 pb-4">
         <div>
           <h2 className="text-2xl font-black tracking-tighter text-white">エグゼクティブ <span className="text-primary text-glow">名簿</span></h2>

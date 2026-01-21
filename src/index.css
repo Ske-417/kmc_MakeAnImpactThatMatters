@@ -209,6 +209,10 @@ body {
 .h-12 { height: 3rem; }
 .w-14 { width: 3.5rem; }
 .h-14 { height: 3.5rem; }
+.w-24 { width: 6rem; }
+.h-24 { height: 6rem; }
+.w-28 { width: 7rem; }
+.h-28 { height: 7rem; }
 .flex { display: flex; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
@@ -217,6 +221,7 @@ body {
 .gap-2 { gap: 0.5rem; }
 .gap-3 { gap: 0.75rem; }
 .gap-4 { gap: 1rem; }
+.gap-5 { gap: 1.25rem; }
 .gap-6 { gap: 1.5rem; }
 .gap-8 { gap: 2rem; }
 .gap-10 { gap: 2.5rem; }
@@ -285,6 +290,8 @@ body {
 .border-white\/20 { border-color: rgba(255, 255, 255, 0.2); }
 .border-white\/40 { border-color: rgba(255, 255, 255, 0.4); }
 .border-white\/80 { border-color: rgba(255, 255, 255, 0.8); }
+.bg-nearly-black { background-color: rgba(5, 5, 5, 0.95); }
+.backdrop-blur-3xl { backdrop-filter: blur(40px); }
 .text-xs { font-size: 0.75rem; }
 .text-black\/80 { color: rgba(0, 0, 0, 0.8); }
 .group-hover\:text-black:hover { color: #000000; }
