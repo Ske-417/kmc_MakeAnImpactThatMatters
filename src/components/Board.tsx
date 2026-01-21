@@ -103,11 +103,12 @@ export const Board: React.FC<BoardProps> = ({ players, currentPlayerIndex }) => 
                   scale: players.indexOf(player) === currentPlayerIndex ? 1.3 : 1,
                 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                className="absolute self-center justify-self-center w-6 h-6 lg:w-9 lg:h-9 rounded-full border-2 border-white/80 shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center justify-center text-white font-black text-[10px] lg:text-sm"
+                className="absolute self-center justify-self-center w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-white/80 shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center justify-center text-white font-black text-[10px] lg:text-sm"
                 style={{
                   backgroundColor: player.color,
                   boxShadow: `0 0 15px ${player.color}66, 0 4px 10px rgba(0,0,0,0.8)`,
                   pointerEvents: 'none',
+                  zIndex: 100, // Ensure tokens are always on top
                 }}
               >
                 {index + 1}
