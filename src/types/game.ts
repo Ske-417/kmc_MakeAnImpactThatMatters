@@ -31,8 +31,10 @@ export interface GameSquare {
   description: string;
   onLand?: (player: Player) => Partial<Player> | void;
   color?: string;
-  x: number; // For visual board positioning
-  y: number;
+  x?: number; // For visual board positioning
+  y?: number;
+  row: number;
+  col: number;
 }
 
 export interface GameState {

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Player } from '../types/game';
-import { Briefcase, Heart, Baby, Coins } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Briefcase, Heart, Baby, Coins, Target } from 'lucide-react';
 
 interface StatusPanelProps {
   players: Player[];
@@ -10,51 +11,83 @@ interface StatusPanelProps {
 
 export const StatusPanel: React.FC<StatusPanelProps> = ({ players, currentPlayerIndex, turnCount }) => {
   return (
-    <div className="flex flex-col gap-4 p-6 premium-card w-full">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">全員のステータス</h2>
-        <div className="text-sm bg-white/20 px-3 py-1 rounded-full">Turn {turnCount}</div>
+    <div className="flex flex-col gap-5 p-8 premium-card w-full shadow-2xl border-white/5 bg-black/40 backdrop-blur-3xl">
+      <div className="flex justify-between items-end mb-2 border-b border-white/10 pb-4">
+        <div>
+          <h2 className="text-2xl font-black tracking-tighter text-white">エグゼクティブ <span className="text-primary text-glow">名簿</span></h2>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-white font-bold mt-1">Impact 監視パネル</p>
+        </div>
+        <div className="text-xs font-black bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-white tracking-widest uppercase">
+          年度 {turnCount}
+        </div>
       </div>
 
       <div className="space-y-4">
         {players.map((player, idx) => (
-          <div
+          <motion.div
             key={player.id}
-            className={`p-4 rounded-xl transition-all duration-300 border-2 ${
+            initial={false}
+            animate={{ 
+              scale: idx === currentPlayerIndex ? 1.02 : 1,
+              opacity: idx === currentPlayerIndex ? 1 : 0.6
+            }}
+            className={`p-5 rounded-2xl transition-all duration-500 border relative overflow-hidden ${
               idx === currentPlayerIndex 
-                ? 'bg-white/30 border-white shadow-lg scale-105' 
-                : 'bg-white/10 border-transparent opacity-70'
+                ? 'bg-white/[0.07] border-primary/50 shadow-[0_0_30px_rgba(134,188,37,0.15)]' 
+                : 'bg-white/[0.02] border-white/5'
             }`}
           >
-            <div className="flex items-center gap-3 mb-2">
+            {idx === currentPlayerIndex && (
+              <div className="absolute top-0 right-0 p-3">
+                <Target size={14} className="text-primary animate-pulse" />
+              </div>
+            )}
+
+            <div className="flex items-center gap-4 mb-4">
               <div 
-                className="w-4 h-4 rounded-full" 
-                style={{ backgroundColor: player.color }} 
+                className="w-4 h-4 rounded-full shadow-lg" 
+                style={{ 
+                  backgroundColor: player.color,
+                  boxShadow: `0 0 10px ${player.color}`
+                }} 
               />
-              <span className="font-bold text-lg">{player.name} {idx === currentPlayerIndex && '👈'}</span>
+              <span className="font-black text-lg tracking-tight text-white">{player.name}</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              <div className="flex items-center gap-2">
-                <Coins size={16} className="text-yellow-400" />
-                <span>{player.money.toLocaleString()}円</span>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-xs font-bold">
+              <div className="flex items-center gap-5 text-white">
+                <Coins size={14} className="text-primary/70" />
+                <span className="tracking-wide">¥{player.money.toLocaleString()}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Briefcase size={16} className="text-blue-400" />
-                <span>{player.career}</span>
+              <div className="flex items-center gap-5 text-white">
+                <Briefcase size={14} className="text-primary/70" />
+                <span className="tracking-wide">{getLocalizedCareer(player.career)}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Heart size={16} className="text-pink-400" />
-                <span>{player.isMarried ? '既婚' : '未婚'}</span>
+              <div className="flex items-center gap-5 text-white">
+                <Heart size={14} className="text-primary/70" />
+                <span className="tracking-wide">{player.isMarried ? '既婚' : '未婚'}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Baby size={16} className="text-green-400" />
-                <span>子供: {player.children}人</span>
+              <div className="flex items-center gap-5 text-white">
+                <Baby size={14} className="text-primary/70" />
+                <span className="tracking-wide">資産 (子供): {player.children}人</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
   );
+};
+
+const getLocalizedCareer = (career: string) => {
+  switch (career) {
+    case 'Analyst': return 'アナリスト';
+    case 'Consultant': return 'コンサルタント';
+    case 'SeniorConsultant': return 'シニアコンサルタント';
+    case 'Manager': return 'マネジャー';
+    case 'SeniorManager': return 'シニアマネジャー';
+    case 'Partner': return 'パートナー';
+    case 'President': return '社長';
+    default: return career;
+  }
 };

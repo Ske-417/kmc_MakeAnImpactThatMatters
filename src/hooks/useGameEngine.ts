@@ -4,19 +4,9 @@ import { BOARD_SQUARES } from '../constants/boardData';
 
 const INITIAL_MONEY = 100000; // 10万円
 
-export const useGameEngine = (playerNames: string[]) => {
+export const useGameEngine = () => {
   const [gameState, setGameState] = useState<GameState>({
-    players: playerNames.map((name, index) => ({
-      id: `p${index}`,
-      name,
-      position: 0,
-      money: INITIAL_MONEY,
-      career: 'Analyst',
-      isMarried: false,
-      children: 0,
-      inventory: [],
-      color: [`#FF6B6B`, `#4ECDC4`, `#FFE66D`, `#6C5CE7`][index % 4],
-    })),
+    players: [],
     currentPlayerIndex: 0,
     isGameOver: false,
     turnCount: 1,
@@ -24,6 +14,28 @@ export const useGameEngine = (playerNames: string[]) => {
 
   const [isSpinning, setIsSpinning] = useState(false);
   const [lastSpinResult, setLastSpinResult] = useState<number | null>(null);
+  const [hasSpun, setHasSpun] = useState(false);
+
+  const initializeGame = useCallback((names: string[]) => {
+    setGameState({
+      players: names.map((name, index) => ({
+        id: `p${index}`,
+        name,
+        position: 0,
+        money: INITIAL_MONEY,
+        career: 'Analyst',
+        isMarried: false,
+        children: 0,
+        inventory: [],
+        color: [`#86bc25`, `#435b14`, `#a6d353`, `#a6a6a6`][index % 4],
+      })),
+      currentPlayerIndex: 0,
+      isGameOver: false,
+      turnCount: 1,
+    });
+    setLastSpinResult(null);
+    setHasSpun(false);
+  }, []);
 
   const movePlayer = useCallback((steps: number) => {
     setGameState((prev) => {
@@ -116,11 +128,13 @@ export const useGameEngine = (playerNames: string[]) => {
       };
     });
     setLastSpinResult(null);
+    setHasSpun(false);
   }, []);
 
   const spin = useCallback(() => {
-    if (isSpinning) return;
+    if (isSpinning || hasSpun) return;
     setIsSpinning(true);
+    setHasSpun(true);
     
     // Simulate spin delay
     setTimeout(() => {
@@ -129,13 +143,15 @@ export const useGameEngine = (playerNames: string[]) => {
       movePlayer(result);
       setIsSpinning(false);
     }, 1500);
-  }, [isSpinning, movePlayer]);
+  }, [isSpinning, hasSpun, movePlayer]);
 
   return {
     gameState,
     spin,
     isSpinning,
+    hasSpun,
     lastSpinResult,
     nextTurn,
+    initializeGame,
   };
 };

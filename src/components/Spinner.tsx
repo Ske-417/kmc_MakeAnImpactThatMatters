@@ -9,55 +9,45 @@ interface SpinnerProps {
 
 export const Spinner: React.FC<SpinnerProps> = ({ onSpin, isSpinning, lastResult }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-8 premium-card">
-      <div className="relative w-48 h-48 mb-8">
-        <motion.div
-          animate={isSpinning ? { rotate: 360 * 5 + (lastResult ? (lastResult - 1) * 60 : 0) } : {}}
-          transition={isSpinning ? { duration: 1.5, ease: "easeOut" } : { duration: 0 }}
-          className="w-full h-full rounded-full border-8 border-white flex items-center justify-center relative overflow-hidden"
-          style={{
-            background: 'conic-gradient(#FF6B6B 0deg 60deg, #4ECDC4 60deg 120deg, #FFE66D 120deg 180deg, #6C5CE7 180deg 240deg, #A29BFE 240deg 300deg, #FD79A8 300deg 360deg)',
-          }}
-        >
-          {[1, 2, 3, 4, 5, 6].map((num, i) => (
-            <div
-              key={num}
-              className="absolute font-bold text-2xl text-white"
-              style={{
-                transform: `rotate(${i * 60 + 30}deg) translateY(-60px)`,
-              }}
-            >
-              {num}
-            </div>
-          ))}
-          {/* Spinner Needle center */}
-          <div className="absolute w-4 h-4 bg-white rounded-full shadow-md z-10" />
-        </motion.div>
-        
-        {/* Indicator */}
-        <div 
-          className="absolute top-0 left-1/2 -ml-2 -mt-4 w-4 h-8 bg-white"
-          style={{ clipPath: 'polygon(50% 100%, 0 0, 100% 0)' }}
-        />
-      </div>
-
-      <button
+    <div className="relative group">
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onSpin}
         disabled={isSpinning}
-        className="button-primary w-full max-w-[200px]"
+        className="w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-black/60 border-2 border-primary flex items-center justify-center relative backdrop-blur-xl shadow-[0_0_30px_rgba(134,188,37,0.3)] disabled:opacity-80 transition-shadow duration-500 overflow-hidden"
       >
-        {isSpinning ? '回転中...' : 'ルーレットを回す'}
-      </button>
+        {/* Animated Spin Ring */}
+        {isSpinning && (
+          <motion.div
+            className="absolute inset-0 border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 0.6, repeat: Infinity, ease: "linear" }}
+          />
+        )}
+        
+        {/* Decorative inner glow */}
+        <div className="absolute inset-2 rounded-full bg-primary/5 blur-md" />
 
-      {lastResult && !isSpinning && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1.5 }}
-          className="mt-4 text-4xl font-extrabold text-white"
-        >
-          {lastResult}
-        </motion.div>
-      )}
+        <div className="flex flex-col items-center justify-center relative z-10">
+          {isSpinning ? (
+            <span className="text-2xl font-black text-primary animate-pulse italic">...</span>
+          ) : lastResult !== null ? (
+            <motion.span 
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="text-4xl lg:text-5xl font-black text-white drop-shadow-[0_0_15px_rgba(134,188,37,0.6)]"
+            >
+              {lastResult}
+            </motion.span>
+          ) : (
+            <span className="text-[10px] lg:text-xs font-black text-primary tracking-widest uppercase">Spin</span>
+          )}
+        </div>
+      </motion.button>
+      
+      {/* Background decoration */}
+      <div className="absolute -inset-1 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </div>
   );
 };
