@@ -13,7 +13,10 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
 
   return (
     // Scene Container
-    <div className="relative h-16 w-[320px] group perspective-1000 z-10">
+    <div 
+      className="relative group perspective-1000 z-10"
+      style={{ width: '320px', height: '64px' }}
+    >
       <motion.div
         className="w-full h-full relative preserve-3d"
         initial={false}
@@ -22,6 +25,8 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
         }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
         style={{ 
+          width: '100%',
+          height: '100%',
           transformStyle: "preserve-3d",
           transformOrigin: "center center" // Explicit center origin
         }}
