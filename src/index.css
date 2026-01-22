@@ -20,14 +20,7 @@
   --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bg-dot-pattern {
-  background-image: 
-    radial-gradient(rgba(134, 188, 37, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
-  background-size: 40px 40px, 100% 100%;
-  background-attachment: fixed;
-  animation: bgPulse 10s ease-in-out infinite alternate;
-}
+/* bg-dot-pattern moved to body */
 
 @keyframes bgPulse {
   0% { background-position: 0px 0px, 0% 0%; }
@@ -47,6 +40,13 @@ body {
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
+  /* Global Dot Pattern */
+  background-image: 
+    radial-gradient(rgba(134, 188, 37, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8)),
+    var(--bg-gradient);
+  background-size: 40px 40px, 100% 100%, 100% 100%;
+  animation: bgPulse 10s ease-in-out infinite alternate;
 }
 
 #root {
