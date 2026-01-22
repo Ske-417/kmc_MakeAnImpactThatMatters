@@ -144,8 +144,6 @@ function App() {
     );
   }
 
-  const currentPlayer = gameState.players[gameState.currentPlayerIndex];
-
   return (
 // Import at top
 
