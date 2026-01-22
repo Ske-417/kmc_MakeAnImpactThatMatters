@@ -307,3 +307,14 @@ body {
 .text-white\/50 { color: rgba(255, 255, 255, 0.5); }
 .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
 .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+
+/* 3D Animation Utilities */
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.rotate-x-180 { transform: rotateX(180deg); }
+
+/* Custom Widths */
+.min-w-300 { min-width: 300px; }
+.w-4 { width: 1rem; }
+.shrink-0 { flex-shrink: 0; }

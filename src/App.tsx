@@ -150,17 +150,15 @@ function App() {
           </div>
 
           {/* Flip Card Container */}
-          <div className="relative h-16 min-w-[300px] perspective-[1000px] group z-10">
+          <div className="relative h-16 min-w-300 perspective-1000 group z-10 transition-all duration-300">
             <motion.div
               className="w-full h-full relative preserve-3d transition-all duration-700"
               animate={{ rotateX: lastSpinResult !== null ? 180 : 0 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ transformStyle: "preserve-3d" }}
             >
               {/* Front Face: Waiting Message */}
               <div 
                 className="absolute inset-0 backface-hidden flex items-center justify-center backdrop-blur-md bg-black/20 rounded-full border border-white/10"
-                style={{ backfaceVisibility: 'hidden' }}
               >
                 <span className="text-sm font-bold text-white tracking-widest animate-pulse">
                   戦略的ムーブを待機中...
@@ -169,10 +167,8 @@ function App() {
 
               {/* Back Face: Event Result */}
               <div 
-                className="absolute inset-0 backface-hidden flex items-center justify-start pl-6 pr-6 backdrop-blur-md bg-white/[0.08] rounded-full border border-primary/30 shadow-[0_0_15px_rgba(134,188,37,0.1)] overflow-hidden"
+                className="absolute inset-0 backface-hidden flex items-center justify-start pl-6 pr-6 backdrop-blur-md bg-white/[0.08] rounded-full border border-primary/30 shadow-[0_0_15px_rgba(134,188,37,0.1)] overflow-hidden rotate-x-180"
                 style={{ 
-                  backfaceVisibility: 'hidden', 
-                  transform: 'rotateX(180deg)',
                   backgroundColor: currentPlayer?.color ? `${currentPlayer.color}20` : 'rgba(255,255,255,0.08)'
                 }}
               >
@@ -183,11 +179,11 @@ function App() {
                   />
                   
                   {lastSpinResult !== null && (
-                    <div className="flex flex-col whitespace-nowrap overflow-hidden">
-                      <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-0.5 opacity-90 truncate">
+                    <div className="flex flex-col whitespace-nowrap overflow-hidden w-full">
+                      <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-0.5 opacity-90 truncate block">
                         {BOARD_SQUARES[currentPlayer.position].label}
                       </span>
-                      <span className="text-xs font-bold text-white leading-tight truncate">
+                      <span className="text-xs font-bold text-white leading-tight truncate block">
                          {BOARD_SQUARES[currentPlayer.position].description}
                       </span>
                     </div>
