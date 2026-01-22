@@ -326,7 +326,7 @@ body {
 @media (min-width: 1024px) {
   .flip-card-responsive {
     width: 24rem; /* w-96 = 384px */
-    height: 6rem; /* h-24 = 96px */
+    height: 5.25rem; /* ~84px for optical alignment with 96px circle */
   }
 }
 
