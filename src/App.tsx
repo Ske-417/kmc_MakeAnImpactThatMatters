@@ -150,11 +150,11 @@ function App() {
 
 
     <main className="board-container bg-[#050505] relative bg-dot-pattern">
-      <header className="top-dashboard px-8 h-24">
+      <header className="top-dashboard px-8 h-24 flex items-center justify-between">
         {/* ... Left side ... */}
-
+        
         {/* Center: Event Display & Spinner */}
-        <div className="flex-grow flex justify-center items-center gap-6 max-w-4xl relative">
+        <div className="flex-grow flex justify-center items-center gap-6 max-w-4xl relative h-full">
           {/* Spinner */}
           <div className="relative shrink-0 z-20">
             <Spinner onSpin={spin} isSpinning={isSpinning} lastResult={lastSpinResult} />
