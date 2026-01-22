@@ -155,6 +155,7 @@ function App() {
               className="w-full h-full relative preserve-3d transition-all duration-700"
               animate={{ rotateX: lastSpinResult !== null ? 180 : 0 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
+              style={{ transformStyle: "preserve-3d", transformOrigin: "center" }}
             >
               {/* Front Face: Waiting Message */}
               <div 
