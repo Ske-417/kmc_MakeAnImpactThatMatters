@@ -6,7 +6,7 @@ import { Spinner } from './components/Spinner';
 import { StatusPanel } from './components/StatusPanel';
 import { useGameEngine } from './hooks/useGameEngine';
 import { BOARD_SQUARES } from './constants/boardData';
-import { ScrambleText } from './components/ScrambleText';
+
 
 function App() {
   const [playerNames, setPlayerNames] = useState<string[]>(['コンサルタント 1', 'コンサルタント 2']);
