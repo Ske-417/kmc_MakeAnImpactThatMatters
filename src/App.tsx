@@ -167,10 +167,10 @@ function App() {
           {/* Flip Card Container */}
           <div className="relative h-16 min-w-300 perspective-1000 group z-10 transition-all duration-300">
             <motion.div
-              className="w-full h-full relative preserve-3d transition-all duration-700"
+              className="w-full h-full relative preserve-3d"
               animate={{ rotateX: lastSpinResult !== null ? 180 : 0 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ transformStyle: "preserve-3d", transformOrigin: "center" }}
+              style={{ transformStyle: "preserve-3d", transformOrigin: "50% 50%" }}
             >
               {/* Front Face: Waiting Message */}
               <div 
