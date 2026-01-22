@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BOARD_SQUARES } from '../constants/boardData';
-import { Player } from '../types/game';
+import type { Player } from '../types/game';
 
 interface FlipEventDisplayProps {
   lastSpinResult: number | null;
