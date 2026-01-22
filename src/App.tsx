@@ -19,7 +19,7 @@ function App() {
   const currentPlayer = gameState.players[gameState.currentPlayerIndex];
 
   useEffect(() => {
-    if (lastSpinResult !== null) {
+    if (lastSpinResult !== null && currentPlayer) {
       // When spin result exists, update the content (Happens at start of event phase)
       setDisplayContent({
         label: BOARD_SQUARES[currentPlayer.position].label,
@@ -28,7 +28,7 @@ function App() {
     }
     // When lastSpinResult becomes null (animation to Waiting), we keep the OLD displayContent
     // This allows the back face to persist while flipping away.
-  }, [lastSpinResult, currentPlayer.position]);
+  }, [lastSpinResult, currentPlayer?.position]);
 
   const handleStartGame = () => {
     initializeGame(playerNames);
