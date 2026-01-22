@@ -316,5 +316,19 @@ body {
 
 /* Custom Widths */
 .min-w-300 { min-width: 300px; }
+
+/* Responsive Flip Card Dimensions to match Spinner */
+.flip-card-responsive {
+  width: 20rem; /* w-80 = 320px */
+  height: 5rem; /* h-20 = 80px */
+}
+
+@media (min-width: 1024px) {
+  .flip-card-responsive {
+    width: 24rem; /* w-96 = 384px */
+    height: 6rem; /* h-24 = 96px */
+  }
+}
+
 .w-4 { width: 1rem; }
 .shrink-0 { flex-shrink: 0; }
