@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Board } from './components/Board';
@@ -12,6 +12,23 @@ function App() {
   const [playerNames, setPlayerNames] = useState<string[]>(['コンサルタント 1', 'コンサルタント 2']);
   const [gameStarted, setGameStarted] = useState(false);
   const { gameState, spin, isSpinning, lastSpinResult, nextTurn, initializeGame, hasSpun } = useGameEngine();
+  
+  // Sticky state for flip animation
+  const [displayContent, setDisplayContent] = useState<{label: string, description: string} | null>(null);
+  
+  const currentPlayer = gameState.players[gameState.currentPlayerIndex];
+
+  useEffect(() => {
+    if (lastSpinResult !== null) {
+      // When spin result exists, update the content (Happens at start of event phase)
+      setDisplayContent({
+        label: BOARD_SQUARES[currentPlayer.position].label,
+        description: BOARD_SQUARES[currentPlayer.position].description
+      });
+    }
+    // When lastSpinResult becomes null (animation to Waiting), we keep the OLD displayContent
+    // This allows the back face to persist while flipping away.
+  }, [lastSpinResult, currentPlayer.position]);
 
   const handleStartGame = () => {
     initializeGame(playerNames);
@@ -179,13 +196,13 @@ function App() {
                     style={{ backgroundColor: currentPlayer?.color }}
                   />
                   
-                  {lastSpinResult !== null && (
+                  {displayContent && (
                     <div className="flex flex-col whitespace-nowrap overflow-hidden w-full">
                       <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-0.5 opacity-90 truncate block">
-                        {BOARD_SQUARES[currentPlayer.position].label}
+                        {displayContent.label}
                       </span>
                       <span className="text-xs font-bold text-white leading-tight truncate block">
-                         {BOARD_SQUARES[currentPlayer.position].description}
+                         {displayContent.description}
                       </span>
                     </div>
                   )}
