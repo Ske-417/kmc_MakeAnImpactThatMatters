@@ -17,7 +17,7 @@ export const StatusPanel: React.FC<StatusPanelProps> = ({ players, currentPlayer
           <h2 className="text-2xl font-black tracking-tighter text-white">エグゼクティブ <span className="text-primary text-glow">名簿</span></h2>
           <p className="text-[10px] uppercase tracking-[0.3em] text-white font-bold mt-1">Impact 監視パネル</p>
         </div>
-        <div className="text-xs font-black bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-white tracking-widest uppercase">
+        <div className="text-xs font-black bg-white/5 border border-white/10 px-4 py-1 rounded-xl text-white tracking-widest uppercase">
           年度 {turnCount}
         </div>
       </div>

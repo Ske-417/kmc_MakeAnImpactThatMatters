@@ -184,7 +184,7 @@ function App() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.4 }}
-                  className="flex flex-col whitespace-nowrap min-w-[180px]"
+                  className="flex flex-col whitespace-nowrap min-w-[200px]"
                 >
                   <span className="text-xs font-black text-primary uppercase tracking-widest mb-0.5 opacity-80">
                     {BOARD_SQUARES[currentPlayer.position].label}
