@@ -15,7 +15,7 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
     // Scene Container
     <div 
       className="relative group perspective-1000 z-10"
-      style={{ width: '380px', height: '80px' }}
+      style={{ width: '400px', height: '96px' }}
     >
       {/* FRONT FACE: Waiting... */}
       <motion.div 
