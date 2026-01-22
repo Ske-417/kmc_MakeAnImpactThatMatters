@@ -129,28 +129,18 @@ function App() {
   const currentPlayer = gameState.players[gameState.currentPlayerIndex];
 
   return (
-    <main className="board-container bg-[#050505] relative">
+// Import at top
+import { ScrambleText } from './components/ScrambleText';
+
+// ... inside App component return ...
+
+    <main className="board-container bg-[#050505] relative bg-dot-pattern">
       <header className="top-dashboard px-8 h-24">
-        {/* Left: Player Info */}
-        <div className="flex items-center gap-10 min-w-[300px]">
-          <div className="flex flex-col border-l-4 border-primary pl-6">
-            <span className="text-[11px] uppercase tracking-[0.3em] text-white/40 font-black mb-1">現在のプレイヤー</span>
-            <div className="flex items-center gap-4">
-              <motion.div 
-                className="w-4 h-4 rounded-full"
-                animate={{ 
-                  backgroundColor: currentPlayer?.color,
-                  boxShadow: `0 0 20px ${currentPlayer?.color}`
-                }}
-              />
-              <span className="text-2xl font-black tracking-tight">{currentPlayer?.name}</span>
-            </div>
-          </div>
-        </div>
+        {/* ... Left side ... */}
 
         {/* Center: Event Display & Spinner */}
-        <div className="flex-grow flex justify-center items-center gap-4 max-w-4xl relative">
-          {/* Spinner (Always visible, acts as the number anchor) */}
+        <div className="flex-grow flex justify-center items-center gap-6 max-w-4xl relative">
+          {/* Spinner */}
           <div className="relative shrink-0 z-20">
             <Spinner onSpin={spin} isSpinning={isSpinning} lastResult={lastSpinResult} />
             {isSpinning && (
@@ -160,50 +150,14 @@ function App() {
             )}
           </div>
 
-          <AnimatePresence mode="wait">
-            {lastSpinResult !== null ? (
-              <motion.div 
-                key={`${gameState.currentPlayerIndex}-${lastSpinResult}`}
-                initial={{ width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0 }}
-                animate={{ width: 'auto', opacity: 1, paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
-                exit={{ width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white/[0.04] border border-white/10 rounded-r-2xl rounded-l-2xl flex items-center overflow-hidden backdrop-blur-2xl shadow-2xl h-16 -ml-8 z-10 pl-6 pr-6"
-              >
-                 {/* Color Bar */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 h-1"
-                  style={{ backgroundColor: currentPlayer?.color }}
-                />
-
-                {/* Spacer to push text past the spinner overlap */}
-                <div className="w-4 shrink-0" />
-
-                {/* Text Content */}
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.4 }}
-                  className="flex flex-col whitespace-nowrap min-w-[200px]"
-                >
-                  <span className="text-xs font-black text-primary uppercase tracking-widest mb-0.5 opacity-80">
-                    {BOARD_SQUARES[currentPlayer.position].label}
-                  </span>
-                  <span className="text-sm text-white/90 leading-tight font-bold">
-                    {BOARD_SQUARES[currentPlayer.position].description}
-                  </span>
-                </motion.div>
-              </motion.div>
-            ) : (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-white text-sm font-black tracking-[0.5em] uppercase italic animate-pulse ml-4"
-              >
-                戦略的ムーブを待機中...
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="flex items-center backdrop-blur-md bg-black/20 rounded-full px-6 py-3 border border-white/10 min-w-[300px]">
+             <ScrambleText 
+               text={lastSpinResult !== null 
+                 ? `${BOARD_SQUARES[currentPlayer.position].label}: ${BOARD_SQUARES[currentPlayer.position].description}`
+                 : "戦略的ムーブを待機中..."} 
+               className="text-sm font-bold text-white tracking-widest"
+             />
+          </div>
         </div>
 
         {/* Right: Actions & Status */}
