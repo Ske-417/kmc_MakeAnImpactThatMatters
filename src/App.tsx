@@ -4,6 +4,7 @@ import confetti from 'canvas-confetti';
 import { Board } from './components/Board';
 import { Spinner } from './components/Spinner';
 import { StatusPanel } from './components/StatusPanel';
+import { FlipEventDisplay } from './components/FlipEventDisplay';
 import { useGameEngine } from './hooks/useGameEngine';
 import { BOARD_SQUARES } from './constants/boardData';
 
@@ -165,48 +166,11 @@ function App() {
           </div>
 
           {/* Flip Card Container */}
-          <div className="relative h-16 min-w-300 perspective-1000 group z-10 transition-all duration-300">
-            <motion.div
-              className="w-full h-full relative preserve-3d"
-              animate={{ rotateX: lastSpinResult !== null ? 180 : 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ transformStyle: "preserve-3d", transformOrigin: "50% 50%" }}
-            >
-              {/* Front Face: Waiting Message */}
-              <div 
-                className="absolute inset-0 backface-hidden flex items-center justify-center backdrop-blur-md bg-black/20 rounded-full border border-white/10"
-              >
-                <span className="text-sm font-bold text-white tracking-widest animate-pulse">
-                  戦略的ムーブを待機中...
-                </span>
-              </div>
-
-              {/* Back Face: Event Result */}
-              <div 
-                className="absolute inset-0 backface-hidden flex items-center justify-start pl-6 pr-6 backdrop-blur-md bg-white/[0.08] rounded-full border border-primary/30 shadow-[0_0_15px_rgba(134,188,37,0.1)] overflow-hidden rotate-x-180"
-                style={{ 
-                  backgroundColor: currentPlayer?.color ? `${currentPlayer.color}20` : 'rgba(255,255,255,0.08)'
-                }}
-              >
-                  {/* Color Accent */}
-                  <div 
-                    className="absolute left-0 top-0 bottom-0 w-1.5"
-                    style={{ backgroundColor: currentPlayer?.color }}
-                  />
-                  
-                  {displayContent && (
-                    <div className="flex flex-col whitespace-nowrap overflow-hidden w-full">
-                      <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-0.5 opacity-90 truncate block">
-                        {displayContent.label}
-                      </span>
-                      <span className="text-xs font-bold text-white leading-tight truncate block">
-                         {displayContent.description}
-                      </span>
-                    </div>
-                  )}
-              </div>
-            </motion.div>
-          </div>
+          <FlipEventDisplay 
+            lastSpinResult={lastSpinResult}
+            currentPlayer={currentPlayer}
+            displayContent={displayContent}
+          />
         </div>
 
         {/* Right: Actions & Status */}
