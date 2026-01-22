@@ -156,7 +156,7 @@ function App() {
         {/* Center: Event Display & Spinner */}
         <div className="flex-grow flex justify-center items-center gap-6 max-w-4xl relative h-full">
           {/* Spinner */}
-          <div className="relative shrink-0 z-20">
+          <div className="relative shrink-0 z-20" style={{ alignSelf: 'center' }}>
             <Spinner onSpin={spin} isSpinning={isSpinning} lastResult={lastSpinResult} />
             {isSpinning && (
               <motion.div 

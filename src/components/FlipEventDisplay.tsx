@@ -15,6 +15,7 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
     // Scene Container
     <div 
       className="relative group perspective-1000 z-10 flip-card-responsive"
+      style={{ alignSelf: 'center' }}
     >
       {/* FRONT FACE: Waiting... */}
       <motion.div 
