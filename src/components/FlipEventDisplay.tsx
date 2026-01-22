@@ -15,7 +15,7 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
     // Scene Container
     <div 
       className="relative group perspective-1000 z-10"
-      style={{ width: '340px', height: '72px' }}
+      style={{ width: '360px', height: '88px' }}
     >
       {/* FRONT FACE: Waiting... */}
       <motion.div 
@@ -47,8 +47,11 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
           transformStyle: "preserve-3d",
           transformOrigin: "center center",
           backgroundColor: currentPlayer?.color ? `${currentPlayer.color}20` : 'rgba(255,255,255,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
           paddingLeft: '32px',
-          paddingRight: '24px'
+          paddingRight: '32px'
         }}
       >
         {/* Color Accent */}
