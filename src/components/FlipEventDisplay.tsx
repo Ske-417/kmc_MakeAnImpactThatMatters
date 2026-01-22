@@ -9,6 +9,8 @@ interface FlipEventDisplayProps {
 }
 
 export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResult, currentPlayer, displayContent }) => {
+  const isFlipped = lastSpinResult !== null;
+
   return (
     // Scene Container
     <div 
