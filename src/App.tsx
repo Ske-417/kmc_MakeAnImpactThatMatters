@@ -6,6 +6,7 @@ import { Spinner } from './components/Spinner';
 import { StatusPanel } from './components/StatusPanel';
 import { useGameEngine } from './hooks/useGameEngine';
 import { BOARD_SQUARES } from './constants/boardData';
+import { ScrambleText } from './components/ScrambleText';
 
 function App() {
   const [playerNames, setPlayerNames] = useState<string[]>(['コンサルタント 1', 'コンサルタント 2']);
@@ -130,9 +131,7 @@ function App() {
 
   return (
 // Import at top
-import { ScrambleText } from './components/ScrambleText';
 
-// ... inside App component return ...
 
     <main className="board-container bg-[#050505] relative bg-dot-pattern">
       <header className="top-dashboard px-8 h-24">
