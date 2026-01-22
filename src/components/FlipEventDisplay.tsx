@@ -9,9 +9,7 @@ interface FlipEventDisplayProps {
 }
 
 export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResult, currentPlayer, displayContent }) => {
-  const isFlipped = lastSpinResult !== null;
-
-
+  return (
     // Scene Container
     <div 
       className="relative group perspective-1000 z-10"
