@@ -5,6 +5,7 @@ import { Board } from './components/Board';
 import { Spinner } from './components/Spinner';
 import { StatusPanel } from './components/StatusPanel';
 import { FlipEventDisplay } from './components/FlipEventDisplay';
+import { BonusIndicator } from './components/BonusIndicator';
 import { useGameEngine } from './hooks/useGameEngine';
 import { BOARD_SQUARES } from './constants/boardData';
 
@@ -12,7 +13,7 @@ import { BOARD_SQUARES } from './constants/boardData';
 function App() {
   const [playerNames, setPlayerNames] = useState<string[]>(['コンサルタント 1', 'コンサルタント 2']);
   const [gameStarted, setGameStarted] = useState(false);
-  const { gameState, spin, isSpinning, lastSpinResult, nextTurn, initializeGame, hasSpun } = useGameEngine();
+  const { gameState, spin, isSpinning, lastSpinResult, nextTurn, initializeGame, hasSpun, passThroughBonuses } = useGameEngine();
   
   // Sticky state for flip animation
   const [displayContent, setDisplayContent] = useState<{label: string, description: string} | null>(null);
@@ -154,7 +155,7 @@ function App() {
         {/* ... Left side ... */}
         
         {/* Center: Event Display & Spinner */}
-        <div className="flex-grow flex justify-center items-center gap-6 max-w-4xl relative h-full">
+        <div className="flex-grow flex justify-center items-center gap-4 max-w-4xl relative h-full ml-8">
           {/* Spinner */}
           <div className="relative shrink-0 z-20" style={{ alignSelf: 'center' }}>
             <Spinner onSpin={spin} isSpinning={isSpinning} lastResult={lastSpinResult} />
@@ -171,6 +172,9 @@ function App() {
             currentPlayer={currentPlayer}
             displayContent={displayContent}
           />
+          
+          {/* Bonus Indicator */}
+          <BonusIndicator bonuses={passThroughBonuses} />
         </div>
 
         {/* Right: Actions & Status */}

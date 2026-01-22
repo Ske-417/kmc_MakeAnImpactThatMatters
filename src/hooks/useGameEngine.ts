@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import type { Player, GameState, Career, GameSquare } from '../types/game';
+import type { Player, GameState, Career, GameSquare, PassThroughBonus } from '../types/game';
 import { BOARD_SQUARES } from '../constants/boardData';
 
 const INITIAL_MONEY = 100000; // 10万円
@@ -15,6 +15,7 @@ export const useGameEngine = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [lastSpinResult, setLastSpinResult] = useState<number | null>(null);
   const [hasSpun, setHasSpun] = useState(false);
+  const [passThroughBonuses, setPassThroughBonuses] = useState<PassThroughBonus[]>([]);
 
   const initializeGame = useCallback((names: string[]) => {
     setGameState({
@@ -38,9 +39,12 @@ export const useGameEngine = () => {
   }, []);
 
   const movePlayer = useCallback((steps: number) => {
+    const bonuses: PassThroughBonus[] = [];
+    
     setGameState((prev) => {
       const currentPlayer = prev.players[prev.currentPlayerIndex];
-      let newPosition = currentPlayer.position + steps;
+      const startPosition = currentPlayer.position;
+      let newPosition = startPosition + steps;
       
       // Overflow check
       if (newPosition >= BOARD_SQUARES.length) {
@@ -50,7 +54,20 @@ export const useGameEngine = () => {
       const newPlayers = [...prev.players];
       const updatedPlayer = { ...currentPlayer, position: newPosition };
       
-      // Handle Square Logic
+      // Check all squares passed (excluding start and end)
+      for (let i = startPosition + 1; i < newPosition; i++) {
+        const passedSquare = BOARD_SQUARES[i];
+        if (passedSquare.type === 'PROMOTION') {
+          promotePlayer(updatedPlayer);
+          bonuses.push({ type: 'PROMOTION', label: '昇格!', icon: '💼' });
+        } else if (passedSquare.type === 'PAYDAY') {
+          const salary = getSalary(updatedPlayer.career);
+          updatedPlayer.money += salary;
+          bonuses.push({ type: 'PAYDAY', label: `給料 ¥${salary.toLocaleString()}`, icon: '💰' });
+        }
+      }
+      
+      // Handle landing square
       const landedSquare = BOARD_SQUARES[newPosition];
       applySquareEffect(updatedPlayer, landedSquare);
 
@@ -61,6 +78,9 @@ export const useGameEngine = () => {
         players: newPlayers,
       };
     });
+    
+    // Update bonuses after state update
+    setPassThroughBonuses(bonuses);
   }, []);
 
   const applySquareEffect = (player: Player, square: GameSquare) => {
@@ -129,6 +149,7 @@ export const useGameEngine = () => {
     });
     setLastSpinResult(null);
     setHasSpun(false);
+    setPassThroughBonuses([]); // Clear bonuses for next turn
   }, []);
 
   const spin = useCallback(() => {
@@ -153,5 +174,6 @@ export const useGameEngine = () => {
     lastSpinResult,
     nextTurn,
     initializeGame,
+    passThroughBonuses,
   };
 };

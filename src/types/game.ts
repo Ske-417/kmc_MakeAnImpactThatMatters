@@ -43,3 +43,9 @@ export interface GameState {
   isGameOver: boolean;
   turnCount: number;
 }
+
+export interface PassThroughBonus {
+  type: 'PROMOTION' | 'PAYDAY';
+  label: string;
+  icon: string;
+}
