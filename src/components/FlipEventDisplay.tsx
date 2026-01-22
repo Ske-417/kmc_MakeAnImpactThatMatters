@@ -15,7 +15,7 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
     // Scene Container
     <div 
       className="relative group perspective-1000 z-10"
-      style={{ width: '320px', height: '64px' }}
+      style={{ width: '340px', height: '72px' }}
     >
       {/* FRONT FACE: Waiting... */}
       <motion.div 
@@ -37,7 +37,7 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
 
       {/* BACK FACE: Result */}
       <motion.div 
-        className="absolute inset-0 backface-hidden flex items-center justify-start pl-6 pr-6 backdrop-blur-md bg-white/[0.08] rounded-full border border-primary/30 shadow-[0_0_15px_rgba(134,188,37,0.1)] overflow-hidden"
+        className="absolute inset-0 backface-hidden flex items-center justify-start backdrop-blur-md bg-white/[0.08] rounded-full border border-primary/30 shadow-[0_0_15px_rgba(134,188,37,0.1)] overflow-hidden"
         initial={{ rotateX: 180 }}
         animate={{ rotateX: isFlipped ? 360 : 180 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -46,7 +46,9 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
           WebkitBackfaceVisibility: 'hidden',
           transformStyle: "preserve-3d",
           transformOrigin: "center center",
-          backgroundColor: currentPlayer?.color ? `${currentPlayer.color}20` : 'rgba(255,255,255,0.08)'
+          backgroundColor: currentPlayer?.color ? `${currentPlayer.color}20` : 'rgba(255,255,255,0.08)',
+          paddingLeft: '32px',
+          paddingRight: '24px'
         }}
       >
         {/* Color Accent */}
