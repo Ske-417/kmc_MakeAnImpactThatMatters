@@ -24,9 +24,11 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
         animate={{ rotateX: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
         style={{ 
+          width: '100%',
+          height: '100%',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
-          transformStyle: "preserve-3d", // consistent rendering
+          transformStyle: "preserve-3d",
           transformOrigin: "center center"
         }}
       >
@@ -42,6 +44,8 @@ export const FlipEventDisplay: React.FC<FlipEventDisplayProps> = ({ lastSpinResu
         animate={{ rotateX: isFlipped ? 360 : 180 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
         style={{ 
+          width: '100%',
+          height: '100%',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
           transformStyle: "preserve-3d",
