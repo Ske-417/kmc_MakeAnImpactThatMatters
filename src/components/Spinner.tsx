@@ -41,7 +41,7 @@ export const Spinner: React.FC<SpinnerProps> = ({ onSpin, isSpinning, lastResult
               {lastResult}
             </motion.span>
           ) : (
-            <span className="text-[10px] lg:text-xs font-black text-primary tracking-widest uppercase">Spin</span>
+            <span className="text-xs lg:text-sm font-black text-primary tracking-widest uppercase">Spin</span>
           )}
         </div>
       </motion.button>
